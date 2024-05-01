@@ -3,3 +3,4 @@
 ![Ekran görüntüsü 2024-05-01 091339](https://github.com/Memirdogan/PythonEntranceApps/assets/66549233/07ee4db6-2338-42f7-bdbd-5ae738655cdd)
 ![Ekran görüntüsü 2024-05-01 091347](https://github.com/Memirdogan/PythonEntranceApps/assets/66549233/55918522-bca3-4299-97a3-8739d32d90ee)
 ![Ekran görüntüsü 2024-05-01 091307](https://github.com/Memirdogan/PythonEntranceApps/assets/66549233/6ef8a3d1-5b7b-4333-a4d7-c54aff475fec)
+![Ekran görüntüsü 2024-05-01 091614](https://github.com/Memirdogan/PythonEntranceApps/assets/66549233/f4f8fc28-175d-4826-b6e6-19c1420b3967)
