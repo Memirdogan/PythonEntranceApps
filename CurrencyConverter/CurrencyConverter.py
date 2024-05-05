@@ -1,7 +1,6 @@
 import re
 import tkinter as tk
 from tkinter import ttk
-
 import requests
 
 
@@ -33,7 +32,7 @@ class converterUI(tk.Tk):
         self.introLabel.config(font="Courier 15 bold")
 
         self.dateLabel = tk.Label(self,
-                                  text=f"1 Türk lirası = {self.currency_converter.convert('USD', 'TRY', 1)} USD \n "
+                                  text=f"1 Dolar = {self.currency_converter.convert('USD', 'TRY', 1)} Türk lirası \n "
                                        f"Date : {self.currency_converter.data['date']}")
         self.dateLabel.config(font="Courier 10 bold")
 
@@ -64,6 +63,21 @@ class converterUI(tk.Tk):
         self.amount_field.place(x=36, y=150)
         self.to_currency_dropdown.place(x=340, y=120)
         self.converted_amount_field_label.place(x=346, y=150)
+
+        # convert button
+        self.convert_button = tk.Button(self, text="Convert", fg="black", command=self.perform)
+        self.convert_button.config(font=('Courier', 10, 'bold'))
+        self.convert_button.place(x= 225, y= 135)
+
+    def perform(self,):
+        amount = float(self.amount_field.get())
+        from_curr = self.from_currency_variable.get()
+        to_curr = self.to_currency_variable.get()
+
+        converted_amount = self.currency_converter.convert(from_curr,to_curr,amount)
+        converted_amount = round(converted_amount,2)
+
+        self.converted_amount_field_label.config(text= str(converted_amount))
 
     def restrictNumberOnly(self, action, string):
         regex = re.compile(r"[0-9,]*?(\.)?[0-9,]*$")
