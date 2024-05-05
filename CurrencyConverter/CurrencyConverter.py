@@ -26,23 +26,33 @@ class converterUI(tk.Tk):
         self.title("Döviz çevirici")
         self.currency_converter = converter
 
+        self.style = ttk.Style()
+        self.style.configure('TFrame', background='whitesmoke')  # Arka plan rengini ayarla
+
+        self.frame = ttk.Frame(self, style='TFrame')
+        self.frame.pack(fill=tk.BOTH, expand=True)
+
         self.geometry("500x200")
 
-        self.introLabel = tk.Label(self, text="Döviz kuru hesaplayıcıya hoşgeldiniz", bg="blue")
-        self.introLabel.config(font="Courier 15 bold")
+        self.introLabel = ttk.Label(self, text="Döviz Kuru Hesaplayıcı", background="whitesmoke")
+        self.introLabel.config(font="Helvetica 15 bold")
+        self.introLabel.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
 
-        self.dateLabel = tk.Label(self,
-                                  text=f"1 Dolar = {self.currency_converter.convert('USD', 'TRY', 1)} Türk lirası \n "
-                                       f"Date : {self.currency_converter.data['date']}")
-        self.dateLabel.config(font="Courier 10 bold")
-
-        self.introLabel.place(x=25, y=5)
-        self.dateLabel.place(x=140, y=50)
+        self.dateLabel = ttk.Label(self,
+                                   text=f"1 Dolar = {self.currency_converter.convert('USD', 'TRY', 1)} Türk lirası \n "
+                                        f"Tarih : {self.currency_converter.data['date']}")
+        self.style.configure('TLabel', font=('Courier', 10, 'bold'), justify=tk.CENTER)
+        self.dateLabel.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
         # entry box
         valid = (self.register(self.restrictNumberOnly), '%d', '%P')
-        self.amount_field = tk.Entry(self, justify=tk.CENTER, validate="key", validatecommand=valid)
-        self.converted_amount_field_label = tk.Label(self, text="", fg="black", bg="white", justify=tk.CENTER, width=17)
+        self.amount_field = ttk.Entry(self, validate="key", validatecommand=valid)
+        self.style.configure('TEntry', justify=tk.CENTER)
+        self.amount_field.place(relx=0.25, rely=0.55, anchor=tk.CENTER)
+
+        self.converted_amount_field_label = ttk.Label(self, text="", width=17)
+        self.style.configure('TLabel', justify=tk.CENTER)
+        self.converted_amount_field_label.place(relx=0.75, rely=0.55, anchor=tk.CENTER)
 
         # dropdown
         self.from_currency_variable = tk.StringVar(self)
@@ -55,19 +65,17 @@ class converterUI(tk.Tk):
         self.from_currency_dropdown = ttk.Combobox(self, textvariable=self.from_currency_variable,
                                                    values=list(self.currency_converter.tokens.keys()), font=font,
                                                    state='readonly', width=12, justify=tk.CENTER)
+        self.from_currency_dropdown.place(relx=0.25, rely=0.7, anchor=tk.CENTER)
+
         self.to_currency_dropdown = ttk.Combobox(self, textvariable=self.to_currency_variable,
                                                  values=list(self.currency_converter.tokens.keys()), font=font,
                                                  state='readonly', width=12, justify=tk.CENTER)
-        # placing
-        self.from_currency_dropdown.place(x=30, y=120)
-        self.amount_field.place(x=36, y=150)
-        self.to_currency_dropdown.place(x=340, y=120)
-        self.converted_amount_field_label.place(x=346, y=150)
+        self.to_currency_dropdown.place(relx=0.75, rely=0.7, anchor=tk.CENTER)
 
         # convert button
-        self.convert_button = tk.Button(self, text="Convert", fg="black", command=self.perform)
-        self.convert_button.config(font=('Courier', 10, 'bold'))
-        self.convert_button.place(x= 225, y= 135)
+        self.convert_button = ttk.Button(self, text="Convert", command=self.perform)
+        self.style.configure('TButton', font=('Courier', 10, 'bold'))
+        self.convert_button.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
 
     def perform(self,):
         amount = float(self.amount_field.get())
