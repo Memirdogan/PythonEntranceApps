@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import requests
 
-
+# Convert and API
 class RealTimeCurrencyConverter:
     def __init__(self, url):
         self.data = requests.get(url).json()
@@ -34,13 +34,14 @@ class converterUI(tk.Tk):
 
         self.geometry("500x200")
 
+        # intro and date label
         self.introLabel = ttk.Label(self, text="Döviz Kuru Hesaplayıcı", background="whitesmoke")
         self.introLabel.config(font="Helvetica 15 bold")
         self.introLabel.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
 
         self.dateLabel = ttk.Label(self,
                                    text=f"1 Dolar = {self.currency_converter.convert('USD', 'TRY', 1)} Türk lirası \n "
-                                        f"Tarih : {self.currency_converter.data['date']}")
+                                        f"Tarih : {self.currency_converter.data['date']}", background="whitesmoke")
         self.style.configure('TLabel', font=('Courier', 10, 'bold'), justify=tk.CENTER)
         self.dateLabel.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
@@ -48,11 +49,12 @@ class converterUI(tk.Tk):
         valid = (self.register(self.restrictNumberOnly), '%d', '%P')
         self.amount_field = ttk.Entry(self, validate="key", validatecommand=valid)
         self.style.configure('TEntry', justify=tk.CENTER)
-        self.amount_field.place(relx=0.25, rely=0.55, anchor=tk.CENTER)
+        self.amount_field.place(relx=0.25, rely=0.7, anchor=tk.CENTER)
 
-        self.converted_amount_field_label = ttk.Label(self, text="", width=17)
+        # output label
+        self.converted_amount_field_label = ttk.Label(self, text="", width=17, background="whitesmoke")
         self.style.configure('TLabel', justify=tk.CENTER)
-        self.converted_amount_field_label.place(relx=0.75, rely=0.55, anchor=tk.CENTER)
+        self.converted_amount_field_label.place(relx=0.75, rely=0.7, anchor=tk.CENTER)
 
         # dropdown
         self.from_currency_variable = tk.StringVar(self)
@@ -65,18 +67,19 @@ class converterUI(tk.Tk):
         self.from_currency_dropdown = ttk.Combobox(self, textvariable=self.from_currency_variable,
                                                    values=list(self.currency_converter.tokens.keys()), font=font,
                                                    state='readonly', width=12, justify=tk.CENTER)
-        self.from_currency_dropdown.place(relx=0.25, rely=0.7, anchor=tk.CENTER)
+        self.from_currency_dropdown.place(relx=0.25, rely=0.55, anchor=tk.CENTER)
 
         self.to_currency_dropdown = ttk.Combobox(self, textvariable=self.to_currency_variable,
                                                  values=list(self.currency_converter.tokens.keys()), font=font,
                                                  state='readonly', width=12, justify=tk.CENTER)
-        self.to_currency_dropdown.place(relx=0.75, rely=0.7, anchor=tk.CENTER)
+        self.to_currency_dropdown.place(relx=0.75, rely=0.55, anchor=tk.CENTER)
 
         # convert button
         self.convert_button = ttk.Button(self, text="Convert", command=self.perform)
         self.style.configure('TButton', font=('Courier', 10, 'bold'))
         self.convert_button.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
 
+    # convert button settings
     def perform(self,):
         amount = float(self.amount_field.get())
         from_curr = self.from_currency_variable.get()
@@ -87,6 +90,7 @@ class converterUI(tk.Tk):
 
         self.converted_amount_field_label.config(text= str(converted_amount))
 
+    # entry box check
     def restrictNumberOnly(self, action, string):
         regex = re.compile(r"[0-9,]*?(\.)?[0-9,]*$")
         result = regex.match(string)
