@@ -15,7 +15,6 @@ class NumberGuess:
         self.upper_bound = 100
 
     def start_game(self, form):
-
         # guess label
         self.label_guess = ttk.Label(form, text="", background="whitesmoke")
         self.label_guess.configure(style="TLabel", font=("Courier", 14, 'bold'), justify=tk.CENTER)
@@ -55,6 +54,7 @@ class NumberGuess:
         self.guess = random.randint(self.lower_bound, self.upper_bound)
         self.label_guess.config(text=f"{self.guess}")
 
+
 class NumberGuessUI:
     def __init__(self, form):
         self.start_button = None
@@ -67,15 +67,15 @@ class NumberGuessUI:
 
     def create_widgets(self):
         self.form.style = ttk.Style()
-        self.form.style.configure('TFrame', background='whitesmoke',font=("Courier", 18, "bold"))
+        self.form.style.configure('TFrame', background='whitesmoke', font=("Courier", 18, "bold"))
 
         self.form.frame = ttk.Frame(self.form, style="TFrame")
         self.form.frame.pack(fill=tk.BOTH, expand=True)
 
         self.form.geometry("500x200")
-        self.intro_Screen()
+        self.intro_screen()
 
-    def intro_Screen(self):
+    def intro_screen(self):
         # intro label
         self.introlabel = ttk.Label(self.form.frame, text="Sayı tahmin etme oyununa hoşgeldiniz",
                                     background="whitesmoke")
@@ -83,13 +83,15 @@ class NumberGuessUI:
         self.introlabel.place(relx=0.5, rely=0.2, anchor=tk.CENTER)
 
         # description label
-        self.desclabel = ttk.Label(self.form.frame, text="Aklınızdan 1-100 arası bir sayı tutun ve bot bilmeye çalışsın",
-                                    background="whitesmoke")
+        self.desclabel = ttk.Label(self.form.frame,
+                                   text="Aklınızdan 1-100 arası bir sayı tutun ve bot bilmeye çalışsın",
+                                   background="whitesmoke")
         self.desclabel.configure(style="TLabel", font=("Courier", 8, 'bold'), justify=tk.CENTER)
         self.desclabel.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
         # start button
-        self.start_button = ttk.Button(self.form.frame, text="Oyuna başla", padding=(16, 8), command=self.destroy_and_start)
+        self.start_button = ttk.Button(self.form.frame, text="Oyuna başla", padding=(16, 8),
+                                       command=self.destroy_and_start)
         self.start_button.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
     def destroy_and_start(self):
@@ -97,6 +99,7 @@ class NumberGuessUI:
         self.start_button.destroy()
         self.desclabel.destroy()
         self.number_guess.start_game(self.form)
+
 
 if __name__ == '__main__':
     form = tk.Tk()
