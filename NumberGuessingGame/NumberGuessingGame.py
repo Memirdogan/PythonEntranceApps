@@ -1,9 +1,9 @@
 import random
-class NumberGuess:
-    def __init__(self):
-        print("!!! sayı tahmin etme oyununa hoşgeldiniz !!!")
-        self.start_game()
+import tkinter as tk
+from tkinter import ttk
 
+
+class NumberGuess:
     def start_game(self):
         while True:
             print("- aklınızdan bir sayı tutun (1-100)\n")
@@ -32,5 +32,31 @@ class NumberGuess:
             else:
                 print("Hatalı tuşlama yaptınız!")
 
+class NumberGuessUI:
+    def __init__(self, form):
+        self.form = form
+        self.form.title("Sayı Tahmin Oyunu")
+        self.number_guess = NumberGuess()
+        self.create_widgets()
 
-game = NumberGuess()
+    def create_widgets(self):
+        self.form.style = ttk.Style()
+        self.form.style.configure('TFrame', background='whitesmoke')
+
+        self.form.frame = ttk.Frame(self.form, style="TFrame")
+        self.form.frame.pack(fill=tk.BOTH, expand=True)
+
+        self.form.geometry("500x200")
+
+        self.introlabel = ttk.Label(self.form.frame, text="!!! sayı tahmin etme oyununa hoşgeldiniz !!!",
+                                    background="whitesmoke")
+        self.introlabel.configure(style="TLabel", font=("Courier", 13, 'bold'), justify=tk.CENTER)
+        self.introlabel.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+        start_button = ttk.Button(self.form.frame, text="Oyuna başla", command=self.number_guess.start_game())
+        start_button.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+
+if __name__ == '__main__':
+    form = tk.Tk()
+    game_ui = NumberGuessUI(form)
+    form.mainloop()
