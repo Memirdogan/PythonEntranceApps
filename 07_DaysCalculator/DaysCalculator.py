@@ -27,6 +27,7 @@ class TimeCalculate:
         self.calender_label.place(relx=0.5, rely=0.2, anchor=tk.CENTER)
 
 
+
 if __name__ == '__main__':
     calculate = TimeCalculate()
     calculate.create_widgets()
