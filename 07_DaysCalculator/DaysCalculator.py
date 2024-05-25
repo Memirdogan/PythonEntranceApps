@@ -68,9 +68,6 @@ class TimeCalculate:
 
 
 
-
-
-
 if __name__ == '__main__':
     calculate = TimeCalculate()
     calculate.create_widgets()
