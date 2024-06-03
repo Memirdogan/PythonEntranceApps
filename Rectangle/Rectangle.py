@@ -3,9 +3,9 @@ import math
 
 class Rectangle:
     def __init__(self, topleft, xlength, ylength):
-        if isinstance(topleft, list) and len(topleft) == 2 and isinstance(xlength, (int, float)) and isinstance(ylength,
-                                                                                                                (int,
-                                                                                                                 float)):
+        if (isinstance(topleft, list) and len(topleft) == 2 and
+                isinstance(xlength, (int, float)) and xlength > 0 and
+                isinstance(ylength, (int, float)) and ylength > 0):
             self.topleft = topleft
             self.xlength = xlength
             self.ylength = ylength
@@ -16,24 +16,17 @@ class Rectangle:
             self.xlength = None
             self.ylength = None
 
-    ##
-    def intersect(self, other_rectangle):
-        if (self.topleft[0] < other_rectangle.topleft[0] + other_rectangle.xlength and
-                self.topleft[0] + self.xlength > other_rectangle.topleft[0] and
-                self.topleft[1] < other_rectangle.topleft[1] + other_rectangle.ylength and
-                self.topleft[1] + self.ylength > other_rectangle.topleft[1]):
-            return True
-        else:
-            return False
-
-    ##
+    def intersect(self, other):
+        return (self.topleft[0] < other.topleft[0] + other.xlength and
+                self.topleft[0] + self.xlength > other.topleft[0] and
+                self.topleft[1] < other.topleft[1] + other.ylength and
+                self.topleft[1] + self.ylength > other.topleft[1])
     def area(self):
         return self.xlength * self.ylength
 
     def __lt__(self, other):
         return self.area() < other.area()
 
-    ##
     def center(self):
         center_x = self.topleft[0] + self.xlength / 2
         center_y = self.topleft[1] + self.ylength / 2
@@ -43,8 +36,6 @@ class Rectangle:
         x1, y1 = self.center()
         x2, y2 = other.center()
         return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
-
-    #
 
     def generate_adjacent(self, side):
         if side == 'right':
