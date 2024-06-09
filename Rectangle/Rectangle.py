@@ -51,3 +51,5 @@ class Rectangle:
             return None
 
         return Rectangle(adjacent_topleft, self.xlength, self.ylength)
+
+ 
