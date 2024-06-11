@@ -14,9 +14,7 @@ def main():
     print("Bu program girdiğiniz bilginin geçerli bir e-posta adresi olup olmadığına karar verecektir")
     print()
     while True:
-        print("**********************************************************************")
         print("Geçerli bir e-posta adresinde '@' sembolü ve '.' işareti bulunmalıdır.")
-        print("**********************************************************************")
         print()
         mail = input("Mail adresinizi giriniz: ")
         addressVal(mail)
