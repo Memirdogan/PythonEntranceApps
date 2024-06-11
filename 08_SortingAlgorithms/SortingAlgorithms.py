@@ -28,3 +28,26 @@ def insertion_sort(arr):
         arr[j + 1] = key
     return arr
 
+def main():
+    print("Sıralama Algoritmaları")
+    print("1. Bubble Sort")
+    print("2. Selection Sort")
+    print("3. Insertion Sort")
+
+    choice = int(input("Hangi sıralama algoritmasını kullanmak istiyorsunuz? (1-3): "))
+    arr = list(map(int, input("Sıralamak istediğiniz elemanları aralarında boşluk bırakarak giriniz: ").split()))
+
+    if choice == 1:
+        sorted_arr = bubble_sort(arr)
+    elif choice == 2:
+        sorted_arr = selection_sort(arr)
+    elif choice == 3:
+        sorted_arr = insertion_sort(arr)
+    else:
+        print("Geçersiz seçim")
+        return
+
+    print("Sıralanmış dizi:", sorted_arr)
+
+if __name__ == "__main__":
+    main()
