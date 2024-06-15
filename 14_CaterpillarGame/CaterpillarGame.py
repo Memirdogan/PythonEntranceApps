@@ -56,11 +56,13 @@ def outside_window():
 
 
 def game_over():
+    global game_started
+    game_started = False
     caterpillar.color("yellow")
     leaf.color("yellow")
     t.penup()
     t.hideturtle()
-    t.write('GAME OVER !', align='center', font=('Arial', 30, 'normal'))
+    t.write('GAME OVER!', align='center', font=('Arial', 30, 'normal'))
     t.onkey(start_game, 'space')
 
 
@@ -75,8 +77,17 @@ def display_score(current_score):
 
 def place_leaf():
     leaf.hideturtle()
-    leaf.setx(rd.randint(-200, 200))
-    leaf.sety(rd.randint(-200, 200))
+    while True:
+        new_x = rd.randint(-200, 200)
+        new_y = rd.randint(-200, 200)
+        collision = False
+        for obstacle in obstacles:
+            if leaf.distance(obstacle) < 20:
+                collision = True
+                break
+        if not collision:
+            leaf.setpos(new_x, new_y)
+            break
     leaf.showturtle()
 
 
@@ -88,6 +99,9 @@ def start_game():
 
     score = 0
     text_turtle.clear()
+    caterpillar.hideturtle()
+    caterpillar.setposition(0, 0)
+    caterpillar.showturtle()
 
     caterpillar_speed = 2
     caterpillar_length = 3
@@ -97,35 +111,48 @@ def start_game():
     display_score(score)
     place_leaf()
 
-    while True:
+    while game_started:
         caterpillar.forward(caterpillar_speed)
+        if caterpillar.distance(leaf) < 20:
+            place_leaf()
+            caterpillar_length += 1
+            caterpillar.shapesize(1, caterpillar_length, 1)
+            caterpillar_speed += 1
+            score += 10
+            display_score(score)
         for obstacle in obstacles:
-            if caterpillar.distance(leaf) < 20:
-                place_leaf()
-                caterpillar_length += 1
-                caterpillar.shapesize(1, caterpillar_length, 1)
-                caterpillar_speed += 1
-                score += 10
-                display_score(score)
             if caterpillar.distance(obstacle) < 20:
                 game_over()
                 return
-            if outside_window():
-                game_over()
-                return
+        if outside_window():
+            game_over()
+            return
 
 
 def move_up():
-    caterpillar.setheading(90)
+    if game_started:
+        caterpillar.setheading(90)
 
 
 def move_down():
-    caterpillar.setheading(270)
+    if game_started:
+        caterpillar.setheading(270)
 
 
 def move_left():
-    caterpillar.setheading(180)
+    if game_started:
+        caterpillar.setheading(180)
 
 
 def move_right():
-    caterpillar.setheading(0)
+    if game_started:
+        caterpillar.setheading(0)
+
+
+t.onkey(start_game, 'space')
+t.onkey(move_up, 'Up')
+t.onkey(move_right, 'Right')
+t.onkey(move_down, 'Down')
+t.onkey(move_left, 'Left')
+t.listen()
+t.mainloop()
