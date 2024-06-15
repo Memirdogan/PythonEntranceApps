@@ -96,3 +96,36 @@ def start_game():
 
     display_score(score)
     place_leaf()
+
+    while True:
+        caterpillar.forward(caterpillar_speed)
+        for obstacle in obstacles:
+            if caterpillar.distance(leaf) < 20:
+                place_leaf()
+                caterpillar_length += 1
+                caterpillar.shapesize(1, caterpillar_length, 1)
+                caterpillar_speed += 1
+                score += 10
+                display_score(score)
+            if caterpillar.distance(obstacle) < 20:
+                game_over()
+                return
+            if outside_window():
+                game_over()
+                return
+
+
+def move_up():
+    caterpillar.setheading(90)
+
+
+def move_down():
+    caterpillar.setheading(270)
+
+
+def move_left():
+    caterpillar.setheading(180)
+
+
+def move_right():
+    caterpillar.setheading(0)
