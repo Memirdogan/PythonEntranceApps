@@ -78,3 +78,21 @@ def place_leaf():
     leaf.setx(rd.randint(-200, 200))
     leaf.sety(rd.randint(-200, 200))
     leaf.showturtle()
+
+
+def start_game():
+    global game_started
+    if game_started:
+        return
+    game_started = True
+
+    score = 0
+    text_turtle.clear()
+
+    caterpillar_speed = 2
+    caterpillar_length = 3
+    caterpillar.shapesize(1, caterpillar_length, 1)
+    caterpillar.showturtle()
+
+    display_score(score)
+    place_leaf()
