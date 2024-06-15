@@ -5,7 +5,8 @@
 
 # Caterpillar
 <p align="center">
-<img src="https://static.wikia.nocookie.net/pixar/images/e/ec/Heimlich.png/revision/latest?cb=20170807224005" width=30% height=30%>
+<img src="https://github.com/Memirdogan/PythonEntranceApps/assets/66549233/748cb0fc-b329-49e5-8d4e-d9b0f218f387" width=30% height=30%>
+
 
 ## 🛠️ Description
 
