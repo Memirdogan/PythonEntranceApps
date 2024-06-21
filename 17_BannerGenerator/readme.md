@@ -26,3 +26,4 @@ python BannerGenerator.py
 <p align="center">
 <img src="https://github.com/Memirdogan/PythonEntranceApps/assets/66549233/23c1fc5e-fc71-4270-ab5c-91d0797801c4" width=70% height=70%>
 <img src="https://github.com/Memirdogan/PythonEntranceApps/assets/66549233/9b0af7ce-1532-407f-b93a-c597460ac92a" width=70% height=70%>
+
