@@ -10,6 +10,22 @@ ctk.set_default_color_theme("blue")
 
 class App(ctk.CTk):
     def __init__(self, *args, **kwargs):
+        self.Details = None
+        self.Reset = None
+        self.Calculate = None
+        self.MatDisp = None
+        self.MatVal = None
+        self.AmtDisp = None
+        self.InvAmt = None
+        self.Output = None
+        self.ls = None
+        self.lumpSum = None
+        self.roi = None
+        self.ror = None
+        self.ten = None
+        self.Tenure = None
+        self.Amt = None
+        self.sip_Amt = None
         self.input_frame = None
 
         super().__init__(*args, **kwargs)
